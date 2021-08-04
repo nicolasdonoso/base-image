@@ -13,6 +13,6 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v2
       - name: build
-        run: docker build -t base-image .
+        run: docker build -t nikodonoso86/base-image .
       - name: push
-        run: docker push base-image
+        run: docker push nikodonoso86/base-image
