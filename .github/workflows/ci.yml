@@ -9,7 +9,7 @@ jobs:
       name: PRO
     steps:
       - name: Docker login
-        run: docker login --username=${{ secrets.DOCKER_USER }} --password=${{ secrets.DOCKER_PASS }}
+        run: docker login --username="${{ secrets.DOCKER_USER }}" --password=${{ secrets.DOCKER_PASS }}
       - name: Checkout repository code
         uses: actions/checkout@v2
       - name: build
