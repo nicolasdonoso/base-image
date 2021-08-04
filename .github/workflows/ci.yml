@@ -8,8 +8,8 @@ jobs:
     environment:
       name: PRO
     steps:
-      - name: Docker login
-        run: docker login --username=$DOCKER_USER --password=$DOCKER_PASS
+      # - name: Docker login
+      #   run: docker login --username=$DOCKER_USER --password=$DOCKER_PASS
       - name: Checkout repository code
         uses: actions/checkout@v2
       - name: build
@@ -18,5 +18,6 @@ jobs:
           docker build -t nikodonoso86/base-image:$GITHUB_JOB .
       - name: push
         run: |
+          docker login --username=$DOCKER_USER --password=$DOCKER_PASS
           docker push nikodonoso86/base-image:latest
           docker push nikodonoso86/base-image:$GITHUB_JOB
