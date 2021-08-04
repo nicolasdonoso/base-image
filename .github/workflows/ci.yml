@@ -6,10 +6,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment:
-      name: PRO
+      name: DEV
     steps:
       - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }} docker.io
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
       - name: Checkout repository code
         uses: actions/checkout@v2
       - name: build
