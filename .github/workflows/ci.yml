@@ -13,6 +13,10 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v2
       - name: build
-        run: docker build -t nikodonoso86/base-image:$CI_PIPELINE_ID .
+        run: |
+          docker build -t nikodonoso86/base-image:latest .
+          docker build -t nikodonoso86/base-image:$GITHUB_JOB .
       - name: push
-        run: docker push nikodonoso86/base-image:$CI_PIPELINE_ID
+        run: |
+          docker push nikodonoso86/base-image:latest
+          docker push nikodonoso86/base-image:$GITHUB_JOB
