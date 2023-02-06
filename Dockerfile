@@ -2,15 +2,15 @@ FROM docker:stable
 
 # Note: Latest version of kubectl may be found at:
 # https://github.com/kubernetes/kubernetes/releases
-ENV KUBE_LATEST_VERSION="v1.16.3"
+ENV KUBE_LATEST_VERSION="v1.20.15"
 # Note: Latest version of helm may be found at:
 # https://github.com/kubernetes/helm/releases
 ENV HELM_VERSION="v3.6.1"
 # Note: Latest version of terraform may be found at:
 # https://github.com/hashicorp/terraform/releases
-ENV TERRAFORM_VERSION="0.12.23"
+ENV TERRAFORM_VERSION="0.13"
 # https://api.github.com/repos/kubernetes/kops/releases
-ENV KOPS_VERSION="v1.19.1"
+ENV KOPS_VERSION="v1.22.3"
 
 RUN apk add --no-cache ca-certificates bash git openssh curl gettext zip rsync jq \
     && wget -q https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -O /usr/local/bin/kubectl \
@@ -34,7 +34,9 @@ RUN apk add --update \
     openssl \
     libffi-dev \
     gcc \
-    libc-dev
+    libc-dev \
+    nodejs \
+    npm
 
 RUN pip install awscli
 RUN pip3 install semver
