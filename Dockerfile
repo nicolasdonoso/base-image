@@ -8,7 +8,7 @@ ENV KUBE_LATEST_VERSION="v1.20.15"
 ENV HELM_VERSION="v3.6.1"
 # Note: Latest version of terraform may be found at:
 # https://github.com/hashicorp/terraform/releases
-ENV TERRAFORM_VERSION="0.13.7"
+ENV TERRAFORM_VERSION="1.3.6"
 # https://api.github.com/repos/kubernetes/kops/releases
 ENV KOPS_VERSION="v1.22.3"
 
