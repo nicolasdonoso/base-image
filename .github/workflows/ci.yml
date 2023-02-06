@@ -23,7 +23,6 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USER }}/base-image:$GITHUB_RUN_ID .
       - name: push
         run: |
-          # docker login -u $DOCKER_USER -p "$DOCKER_PASS"
           docker push ${{ secrets.DOCKER_USER }}/base-image:$GITHUB_RUN_ID
       - name: latest
         if: ${{ github.ref == 'master' }}
