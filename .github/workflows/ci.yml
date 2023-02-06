@@ -1,7 +1,10 @@
 name: ci
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: 
+      - main
+      - master
+      - tf-update
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,13 +14,18 @@ jobs:
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
       - name: Checkout repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
       - name: build
         run: |
           docker build -t ${{ secrets.DOCKER_USER }}/base-image:latest .
-          docker build -t ${{ secrets.DOCKER_USER }}/base-image:$GITHUB_JOB .
+          docker build -t ${{ secrets.DOCKER_USER }}/base-image:$GITHUB_RUN_ID .
       - name: push
         run: |
           # docker login -u $DOCKER_USER -p "$DOCKER_PASS"
+          docker push ${{ secrets.DOCKER_USER }}/base-image:$GITHUB_RUN_ID
+      - name: latest
+        if: ${{ github.ref == 'master' }}
+        run: |
           docker push ${{ secrets.DOCKER_USER }}/base-image:latest
-          docker push ${{ secrets.DOCKER_USER }}/base-image:$GITHUB_JOB
