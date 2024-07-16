@@ -16,6 +16,10 @@ jobs:
           format: space-delimited
           token: ${{ secrets.GH_TOKEN }}
       - run: |
-          for changed_file in ${{ steps.files.outputs.all }}; do
-            echo "Do something with this ${changed_file}."
+          for changed_file in ${{ steps.files.outputs.all }}
+          do 
+            if "Dockerfile" in ${changed_file}
+              then
+                echo "Do something with this ${changed_file}."
+            fi
           done
