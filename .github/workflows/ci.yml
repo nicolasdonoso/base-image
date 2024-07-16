@@ -16,8 +16,9 @@ jobs:
           format: space-delimited
           token: ${{ secrets.GH_TOKEN }}
       - run: |
-          export images_changed=$(echo ${{ steps.files.outputs.all }}|grep "Dockerfile")
-          for image in $images_changed
+          for image in ${{ steps.files.outputs.all }}
           do 
-            echo building $image
+            if [[ $image =~ "Dockerfile" ]]
+              then echo building $image
+            fi
           done
