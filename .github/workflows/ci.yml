@@ -17,7 +17,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
       - run: |
           export images_changed=$(echo ${{ steps.files.outputs.all }}|grep "Dockerfile")
-          echo $images_changed
-          # for changed_file in ${{ steps.files.outputs.all }}
-          # do 
-          # done
+          for image in $images_changed
+          do 
+            echo building $image
+          done
