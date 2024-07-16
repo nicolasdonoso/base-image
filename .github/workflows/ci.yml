@@ -1,23 +1,16 @@
 name: ci
 on:
   push:
-    branches: [ main, master, develop ]
+
+permissions: write-all
 jobs:
-  build:
+  prep-matrix:
+    name: Get cahnged Dockerfiles
     runs-on: ubuntu-latest
-    environment:
-      name: PRO
     steps:
-      - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
-      - name: Checkout repository code
-        uses: actions/checkout@v2
-      - name: build
-        run: |
-          docker build -t ${{ secrets.DOCKER_USER }}/base-image:latest .
-          docker build -t ${{ secrets.DOCKER_USER }}/base-image:$GITHUB_JOB .
-      - name: push
-        run: |
-          # docker login -u $DOCKER_USER -p "$DOCKER_PASS"
-          docker push ${{ secrets.DOCKER_USER }}/base-image:latest
-          docker push ${{ secrets.DOCKER_USER }}/base-image:$GITHUB_JOB
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      - run: |
+          for changed_file in ${{ steps.files.outputs.all }}; do
+            echo "Do something with this ${changed_file}."
+          done
