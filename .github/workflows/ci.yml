@@ -1,11 +1,13 @@
 name: ci
 on:
   push:
+    paths:
+      - dir1/dir2/*/Dockerfile
 
 permissions: write-all
 jobs:
   prep-matrix:
-    name: Get cahnged Dockerfiles
+    name: Get changed Dockerfiles
     runs-on: ubuntu-latest
     steps:
       - id: files
